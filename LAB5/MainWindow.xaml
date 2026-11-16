@@ -1,0 +1,334 @@
+﻿<Window x:Class="LAB5.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="STUDENT SPACE"
+        Height="780"
+        Width="1180"
+        MinHeight="680"
+        MinWidth="980"
+        WindowStartupLocation="CenterScreen"
+        Background="#091D22"
+        FontFamily="Segoe UI"
+        Foreground="#E8FAFA">
+
+    <Window.Resources>
+        <SolidColorBrush x:Key="AccentBrush" Color="#2DD4BF"/>
+        <SolidColorBrush x:Key="PanelBrush" Color="#123039"/>
+        <SolidColorBrush x:Key="InputBrush" Color="#1B4149"/>
+
+        <Style x:Key="PanelStyle" TargetType="Border">
+            <Setter Property="Background" Value="{StaticResource PanelBrush}"/>
+            <Setter Property="CornerRadius" Value="16"/>
+            <Setter Property="Padding" Value="20"/>
+        </Style>
+
+        <Style x:Key="InputStyle" TargetType="TextBox">
+            <Setter Property="Background" Value="{StaticResource InputBrush}"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="CaretBrush" Value="{StaticResource AccentBrush}"/>
+            <Setter Property="BorderBrush" Value="#32616A"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="10,8"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+
+        <Style x:Key="ButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="{StaticResource AccentBrush}"/>
+            <Setter Property="Foreground" Value="#08252B"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="14,10"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Margin" Value="0,0,8,8"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="ButtonBorder"
+                                Background="{TemplateBinding Background}"
+                                CornerRadius="9"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="ButtonBorder"
+                                        Property="Opacity"
+                                        Value="0.82"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="ButtonBorder"
+                                        Property="Opacity"
+                                        Value="0.45"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="FieldLabelStyle" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#A5CBCD"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Margin" Value="0,0,0,6"/>
+        </Style>
+
+        <Style TargetType="DataGrid">
+            <Setter Property="Background" Value="#123039"/>
+            <Setter Property="Foreground" Value="#E8FAFA"/>
+            <Setter Property="RowBackground" Value="#173740"/>
+            <Setter Property="AlternatingRowBackground" Value="#1D4149"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="GridLinesVisibility" Value="None"/>
+            <Setter Property="HeadersVisibility" Value="Column"/>
+            <Setter Property="RowHeight" Value="42"/>
+            <Setter Property="ColumnHeaderHeight" Value="42"/>
+            <Setter Property="CanUserAddRows" Value="False"/>
+            <Setter Property="IsReadOnly" Value="True"/>
+            <Setter Property="SelectionMode" Value="Single"/>
+            <Setter Property="SelectionUnit" Value="FullRow"/>
+            <Setter Property="AutoGenerateColumns" Value="False"/>
+        </Style>
+
+        <Style TargetType="DataGridColumnHeader">
+            <Setter Property="Background" Value="#20515A"/>
+            <Setter Property="Foreground" Value="#6AF0DE"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Padding" Value="12,8"/>
+            <Setter Property="BorderThickness" Value="0"/>
+        </Style>
+
+        <Style TargetType="DataGridRow">
+            <Setter Property="Foreground" Value="#E8FAFA"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Style.Triggers>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="#167E80"/>
+                    <Setter Property="Foreground" Value="White"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="DataGridCell">
+            <Setter Property="Padding" Value="12,8"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Style.Triggers>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="Foreground" Value="White"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="ComboBox">
+            <Setter Property="Background" Value="#1B4149"/>
+            <Setter Property="Foreground" Value="#102D33"/>
+            <Setter Property="BorderBrush" Value="#32616A"/>
+            <Setter Property="Padding" Value="8"/>
+            <Setter Property="FontSize" Value="13"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid Margin="24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Margin="0,0,0,22">
+            <TextBlock Text="STUDENT SPACE"
+                       Foreground="#5EEAD4"
+                       FontSize="30"
+                       FontWeight="Bold"/>
+            <TextBlock Text="Керування студентами • Колекції • LINQ • JSON"
+                       Foreground="#91B9BD"
+                       FontSize="13"
+                       Margin="0,6,0,0"/>
+        </StackPanel>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="310"/>
+                <ColumnDefinition Width="16"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0"
+                    Style="{StaticResource PanelStyle}">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel>
+                        <TextBlock Text="Дані студента"
+                                   FontSize="19"
+                                   FontWeight="Bold"
+                                   Margin="0,0,0,20"/>
+
+                        <TextBlock Text="Ім'я та прізвище"
+                                   Style="{StaticResource FieldLabelStyle}"/>
+                        <TextBox Style="{StaticResource InputStyle}"
+                                 Text="{Binding StudentName, UpdateSourceTrigger=PropertyChanged}"
+                                 Margin="0,0,0,14"/>
+
+                        <TextBlock Text="Вік"
+                                   Style="{StaticResource FieldLabelStyle}"/>
+                        <TextBox Style="{StaticResource InputStyle}"
+                                 Text="{Binding StudentAge, UpdateSourceTrigger=PropertyChanged}"
+                                 Margin="0,0,0,14"/>
+
+                        <TextBlock Text="Маса (кг)"
+                                   Style="{StaticResource FieldLabelStyle}"/>
+                        <TextBox Style="{StaticResource InputStyle}"
+                                 Text="{Binding StudentMass, UpdateSourceTrigger=PropertyChanged}"
+                                 Margin="0,0,0,14"/>
+
+                        <TextBlock Text="Оцінки (через кому)"
+                                   Style="{StaticResource FieldLabelStyle}"/>
+                        <TextBox Style="{StaticResource InputStyle}"
+                                 Text="{Binding MarksInput, UpdateSourceTrigger=PropertyChanged}"
+                                 Margin="0,0,0,6"/>
+
+                        <TextBlock Text="Наприклад: 5, 4, 5, 3"
+                                   Foreground="#7FA6AA"
+                                   FontSize="11"
+                                   Margin="0,0,0,20"/>
+
+                        <Button Content="+ Додати студента"
+                                Style="{StaticResource ButtonStyle}"
+                                Command="{Binding AddStudentCommand}"/>
+
+                        <Button Content="Зберегти зміни"
+                                Style="{StaticResource ButtonStyle}"
+                                Background="#4DDCCB"
+                                Command="{Binding UpdateStudentCommand}"/>
+
+                        <Button Content="Видалити студента"
+                                Style="{StaticResource ButtonStyle}"
+                                Background="#F0A5A5"
+                                Command="{Binding RemoveStudentCommand}"/>
+
+                        <Button Content="Очистити поля"
+                                Style="{StaticResource ButtonStyle}"
+                                Background="#527780"
+                                Foreground="White"
+                                Command="{Binding ClearFormCommand}"/>
+
+                        <Border Height="1"
+                                Background="#32616A"
+                                Margin="0,12,0,18"/>
+
+                        <TextBlock Text="Робота з файлами"
+                                   FontSize="17"
+                                   FontWeight="SemiBold"
+                                   Margin="0,0,0,14"/>
+
+                        <Button Content="Зберегти JSON"
+                                Style="{StaticResource ButtonStyle}"
+                                Command="{Binding SaveJsonCommand}"/>
+
+                        <Button Content="Завантажити JSON"
+                                Style="{StaticResource ButtonStyle}"
+                                Command="{Binding LoadJsonCommand}"/>
+
+                        <Button Content="Експорт у CSV"
+                                Style="{StaticResource ButtonStyle}"
+                                Background="#6DD8D4"
+                                Command="{Binding ExportCsvCommand}"/>
+                    </StackPanel>
+                </ScrollViewer>
+            </Border>
+
+            <Border Grid.Column="2"
+                    Style="{StaticResource PanelStyle}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0"
+                               Text="Реєстр студентів"
+                               FontSize="20"
+                               FontWeight="Bold"
+                               Margin="0,0,0,20"/>
+
+                    <Grid Grid.Row="1" Margin="0,0,0,18">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="12"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="12"/>
+                            <ColumnDefinition Width="1.5*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0">
+                            <TextBlock Text="Пошук за ім'ям"
+                                       Style="{StaticResource FieldLabelStyle}"/>
+                            <TextBox Style="{StaticResource InputStyle}"
+                                     Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="2">
+                            <TextBlock Text="Мін. середній бал"
+                                       Style="{StaticResource FieldLabelStyle}"/>
+                            <TextBox Style="{StaticResource InputStyle}"
+                                     Text="{Binding MinimumAverage, UpdateSourceTrigger=PropertyChanged}"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="4">
+                            <TextBlock Text="Сортування"
+                                       Style="{StaticResource FieldLabelStyle}"/>
+                            <ComboBox ItemsSource="{Binding SortOptions}"
+                                      SelectedItem="{Binding SelectedSort}"
+                                      Height="37"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <DataGrid Grid.Row="2"
+                              ItemsSource="{Binding StudentsView}"
+                              SelectedItem="{Binding SelectedStudent, Mode=TwoWay}"
+                              AlternationCount="2"
+                              HorizontalScrollBarVisibility="Auto"
+                              VerticalScrollBarVisibility="Auto">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Ім'я"
+                                                Binding="{Binding Name}"
+                                                Width="2*"/>
+                            <DataGridTextColumn Header="Вік"
+                                                Binding="{Binding Age}"
+                                                Width="*"/>
+                            <DataGridTextColumn Header="Маса, кг"
+                                                Binding="{Binding Mass, StringFormat={}{0:F1}}"
+                                                Width="*"/>
+                            <DataGridTextColumn Header="Сер. бал"
+                                                Binding="{Binding AverageMark, StringFormat={}{0:F2}}"
+                                                Width="*"/>
+                            <DataGridTextColumn Header="Оцінки"
+                                                Binding="{Binding Marks.Count}"
+                                                Width="*"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </Border>
+        </Grid>
+
+        <Border Grid.Row="2"
+                Background="#123039"
+                CornerRadius="10"
+                Padding="14,12"
+                Margin="0,18,0,0">
+            <StackPanel Orientation="Horizontal">
+                <Ellipse Width="9"
+                         Height="9"
+                         Fill="#2DD4BF"
+                         Margin="0,0,10,0"/>
+                <TextBlock Text="{Binding StatusMessage}"
+                           Foreground="#B5E5E2"
+                           FontSize="13"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>
